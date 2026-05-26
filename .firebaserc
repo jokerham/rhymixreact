@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "rhymixreact"
+  },
+  "targets": {
+    "rhymixreact": {
+      "hosting": {
+        "main": ["rhymixreact"],
+        "staging": ["rhymixreact-staging"]
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
-import { create, type StoreApi } from 'zustand'
 import { onAuthStateChanged, type User } from 'firebase/auth'
+import { create, type StoreApi } from 'zustand'
+
 import { auth } from '../lib/firebase'
 
 interface AuthState {

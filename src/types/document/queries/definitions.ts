@@ -92,6 +92,7 @@ import { insertHistoryQuery } from './insert-history'
 import { insertTrashQuery } from './insert-trash'
 import { isExistsExtraKeyQuery } from './is-exists-extra-key'
 import { moveDocumentExtraVarsQuery } from './move-document-extra-vars'
+import type { RhymixDocumentQueryDefinitionMap } from './types'
 import { updateBlamedCountQuery } from './update-blamed-count'
 import { updateCategoryQuery } from './update-category'
 import { updateCategoryCountQuery } from './update-category-count'
@@ -124,7 +125,6 @@ import { updateReadedCountQuery } from './update-readed-count'
 import { updateTrackbackCountQuery } from './update-trackback-count'
 import { updateUploadedCountQuery } from './update-uploaded-count'
 import { updateVotedCountQuery } from './update-voted-count'
-import type { RhymixDocumentQueryDefinitionMap } from './types'
 
 export const DOCUMENT_QUERY_DEFINITIONS = {
   deleteAlias: deleteAliasQuery,

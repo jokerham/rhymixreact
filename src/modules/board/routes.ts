@@ -1,6 +1,8 @@
 import { createElement, lazy } from 'react'
 import { type RouteObject } from 'react-router-dom'
 
+import type { RouteGroup } from '../../types/route'
+
 const BoardContentListPage = lazy(() => import('./views/BoardContentListPage'))
 const BoardPostPage = lazy(() => import('./views/BoardPostPage'))
 const BoardWritePage = lazy(() => import('./views/BoardWritePage'))
@@ -15,7 +17,7 @@ const UpdateLogPage = lazy(() => import('./views/UpdateLogPage'))
 const UpdateLogViewPage = lazy(() => import('./views/UpdateLogViewPage'))
 const VoteLogPage = lazy(() => import('./views/VoteLogPage'))
 
-export const boardRoutes: RouteObject[] = [
+const boardRoutes: RouteObject[] = [
   {
     path: ':mid',
     children: [
@@ -39,4 +41,8 @@ export const boardRoutes: RouteObject[] = [
       },
     ],
   },
+]
+
+export const routeGroups: RouteGroup[] = [
+  { guard: 'last', routes: boardRoutes },
 ]

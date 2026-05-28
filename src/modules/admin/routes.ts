@@ -1,6 +1,8 @@
 import { createElement, lazy } from 'react'
 import { type RouteObject } from 'react-router-dom'
 
+import type { RouteGroup } from '../../types/route'
+
 import AdminLayout from './AdminLayout'
 
 const AdminDashboard = lazy(() => import('./views/AdminDashboard'))
@@ -10,7 +12,7 @@ const AdminBoardPage = lazy(() => import('./views/AdminBoardPage'))
 const AdminDocumentListPage = lazy(() => import('./views/AdminDocumentListPage'))
 const AdminCommentListPage = lazy(() => import('./views/AdminCommentListPage'))
 
-export const adminRoutes: RouteObject[] = [
+const adminRoutes: RouteObject[] = [
   {
     path: 'admin',
     element: createElement(AdminLayout),
@@ -23,4 +25,8 @@ export const adminRoutes: RouteObject[] = [
       { path: 'comments', element: createElement(AdminCommentListPage) },
     ],
   },
+]
+
+export const routeGroups: RouteGroup[] = [
+  { guard: 'admin', routes: adminRoutes },
 ]

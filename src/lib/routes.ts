@@ -2,18 +2,22 @@ import { createElement, lazy } from 'react'
 import { type RouteObject } from 'react-router-dom'
 
 import RootLayout from '../layouts/RootLayout'
-import { adminRoutes } from '../modules/admin/routes'
-import { boardRoutes } from '../modules/board/routes'
-import { communicationRoutes } from '../modules/communication/routes'
-import { documentRoutes } from '../modules/document/routes'
-import { memberRoutes } from '../modules/member/routes'
-import { notificationRoutes } from '../modules/notification/routes'
-import { searchRoutes } from '../modules/search/routes'
+import type { RouteGroup } from '../types/route'
 
 import { AdminGuard, AuthGuard, GuestGuard } from './guards'
 
 const HomePage = lazy(() => import('../pages/HomePage'))
 const NotFound = lazy(() => import('../pages/NotFound'))
+
+const moduleFiles = import.meta.glob<{ routeGroups: RouteGroup[] }>(
+  '../modules/*/routes.ts',
+  { eager: true },
+)
+
+const allGroups = Object.values(moduleFiles).flatMap((m) => m.routeGroups ?? [])
+
+const byGuard = (guard: RouteGroup['guard']) =>
+  allGroups.filter((g) => g.guard === guard).flatMap((g) => g.routes)
 
 export const routes: RouteObject[] = [
   {
@@ -21,51 +25,14 @@ export const routes: RouteObject[] = [
     element: createElement(RootLayout),
     errorElement: createElement(NotFound),
     children: [
-      // ── Core ────────────────────────────────────────────
       { index: true, element: createElement(HomePage) },
 
-      // ── Member — Guest only ──────────────────────────────
-      {
-        element: createElement(GuestGuard),
-        children: memberRoutes.filter((r) => {
-          const path = r.path as string
-          return path?.includes('login') || path?.includes('signup') || path?.includes('find-account')
-        }),
-      },
+      { element: createElement(GuestGuard), children: byGuard('guest') },
+      ...byGuard('public'),
+      { element: createElement(AuthGuard), children: byGuard('auth') },
+      { element: createElement(AdminGuard), children: byGuard('admin') },
+      ...byGuard('last'),
 
-      // ── Member — Public profile ──────────────────────────
-      ...memberRoutes.filter((r) => {
-        const path = r.path as string
-        return path?.includes(':memberSrl') && !path?.includes('modify')
-      }),
-
-      // ── Member — Auth required ───────────────────────────
-      {
-        element: createElement(AuthGuard),
-        children: [
-          ...memberRoutes.filter((r) => {
-            const path = r.path as string
-            return path?.includes('modify') || path?.includes('leave') || path?.includes('active-logins') || path?.includes('my/')
-          }),
-          ...documentRoutes,
-          ...communicationRoutes,
-          ...notificationRoutes,
-        ],
-      },
-
-      // ── Search ──────────────────────────────────────────
-      ...searchRoutes,
-
-      // ── Admin (AdminGuard) ──────────────────────────────
-      {
-        element: createElement(AdminGuard),
-        children: adminRoutes,
-      },
-
-      // ── Dynamic board/page (:mid) — MUST be last ────────
-      ...boardRoutes,
-
-      // ── 404 ─────────────────────────────────────────────
       { path: '*', element: createElement(NotFound) },
     ],
   },

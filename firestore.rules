@@ -2,10 +2,29 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Site configuration — public read, no client writes
+    match /settings/{document} {
+      allow read: if true;
+    }
+    match /layouts/{document} {
+      allow read: if true;
+    }
+    match /menus/{document} {
+      allow read: if true;
+    }
+    match /menuItems/{document} {
+      allow read: if true;
+    }
+    match /modules/{document} {
+      allow read: if true;
+    }
+
+    // User profiles — authenticated read, owner write
     match /user_profiles/{uid} {
       allow read: if request.auth != null;
       allow write: if request.auth != null && request.auth.uid == uid;
     }
+
     match /{document=**} {
       allow read, write: if false;
     }

@@ -1,7 +1,7 @@
 import { createElement, lazy } from 'react'
 import { type RouteObject } from 'react-router-dom'
 
-import RootLayout from '../layouts/RootLayout'
+import LayoutResolver from '../layouts/LayoutResolver'
 import type { RouteGroup } from '../types/route'
 
 import { AdminGuard, AuthGuard, GuestGuard } from './guards'
@@ -22,7 +22,7 @@ const byGuard = (guard: RouteGroup['guard']) =>
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: createElement(RootLayout),
+    element: createElement(LayoutResolver),
     errorElement: createElement(NotFound),
     children: [
       { index: true, element: createElement(HomePage) },

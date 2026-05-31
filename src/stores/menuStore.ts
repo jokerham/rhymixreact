@@ -2,8 +2,8 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { create } from 'zustand'
 
 import { db } from '../lib/firebase'
-import { getMenuItemsQuery } from '../types/menu/queries/get-menu-items'
-import type { MenuItemDocument } from '../types/menu/schema'
+import { getMenuItemsQuery } from '../modules/menu/queries/get-menu-items'
+import type { MenuItemDocument } from '../modules/menu/schema'
 
 const COL_MENU_ITEMS = getMenuItemsQuery.targets[0].collection
 

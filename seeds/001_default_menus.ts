@@ -1,9 +1,9 @@
 import { Timestamp } from 'firebase-admin/firestore'
 
-import { insertMenuItemQuery } from '../src/types/menu/queries/insert-menu-item.ts'
-import { insertMenuQuery } from '../src/types/menu/queries/insert-menu.ts'
-import { getPageListQuery } from '../src/types/page/queries/get-page-list.ts'
-import { insertPageTypeQuery } from '../src/types/page/queries/insert-page-type.ts'
+import { insertMenuItemQuery } from '../src/modules/menu/queries/insert-menu-item.ts'
+import { insertMenuQuery } from '../src/modules/menu/queries/insert-menu.ts'
+import { getPageListQuery } from '../src/modules/page/queries/get-page-list.ts'
+import { insertPageTypeQuery } from '../src/modules/page/queries/insert-page-type.ts'
 
 import { db } from './config.ts'
 import type { Seed } from './types.ts'

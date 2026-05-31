@@ -29,3 +29,6 @@ dist-ssr
 .env.local
 .env.development
 .env.production
+
+# Firebase service account (contains private keys — never commit)
+service-account.json

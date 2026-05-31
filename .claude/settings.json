@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Applications/XAMPP/xamppfiles/htdocs/rhymix/modules -name \"*schema*\" -o -name \"*migration*\" | xargs grep -l \"layout_srl\" 2>/dev/null)",
+      "Read(//Applications/XAMPP/xamppfiles/htdocs/rhymix/modules/**)",
+      "Bash(find /Applications/XAMPP/xamppfiles/htdocs/rhymix -type f -name \"*.xml\" | xargs grep -l \"table name=\\\\\"modules\\\\\"\" | head -3)",
+      "Read(//Applications/XAMPP/xamppfiles/htdocs/rhymix/**)",
+      "Bash(npm install *)"
+    ]
+  }
+}

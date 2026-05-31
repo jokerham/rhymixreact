@@ -1,7 +1,7 @@
 import { Timestamp } from 'firebase-admin/firestore'
 
-import { insertMenuQuery } from '../src/types/menu/queries/insert-menu.ts'
 import { insertMenuItemQuery } from '../src/types/menu/queries/insert-menu-item.ts'
+import { insertMenuQuery } from '../src/types/menu/queries/insert-menu.ts'
 import { getPageListQuery } from '../src/types/page/queries/get-page-list.ts'
 import { insertPageTypeQuery } from '../src/types/page/queries/insert-page-type.ts'
 

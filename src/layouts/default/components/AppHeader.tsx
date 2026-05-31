@@ -1,22 +1,10 @@
-import {
-  AppBar,
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  InputBase,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Typography,
-  Divider,
-  Container,
-} from '@mui/material'
+import { AppBar, Box, Button, IconButton, InputBase, Toolbar, Typography, Container } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { useAuthStore } from '../../../stores/authStore'
 
+import AuthMenu from './AuthMenu'
 import AuthPopover from './AuthPopover'
 
 type NavItem = { label: string; path: string; end: boolean }
@@ -148,69 +136,6 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
         </Toolbar>
       </Container>
     </AppBar>
-  )
-}
-
-function AuthMenu({ handleLogout, userMenuAnchor, setUserMenuAnchor }: {
-  handleLogout: () => Promise<void>
-  userMenuAnchor: null | HTMLElement
-  setUserMenuAnchor: React.Dispatch<React.SetStateAction<null | HTMLElement>>
-}) {
-  const { user } = useAuthStore()
-
-  return user ? (
-    <>
-      <IconButton size="small" onClick={(e) => setUserMenuAnchor(e.currentTarget)} sx={{ p: 0.5 }} aria-label="user menu">
-        <Avatar sx={{ width: 30, height: 30, bgcolor: '#546e7a', fontSize: '0.8rem' }}>{user.email?.[0]?.toUpperCase() ?? 'U'}</Avatar>
-      </IconButton>
-      <Menu
-        anchorEl={userMenuAnchor}
-        open={Boolean(userMenuAnchor)}
-        onClose={() => setUserMenuAnchor(null)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mt: 0.5 }}
-      >
-        <MenuItem disabled sx={{ fontSize: '0.78rem', color: 'text.secondary', py: 0.5 }}>
-          {user.email}
-        </MenuItem>
-        <Divider />
-        <MenuItem component={Link} to="/member/modify" onClick={() => setUserMenuAnchor(null)} sx={{ fontSize: '0.875rem' }}>
-          My Profile
-        </MenuItem>
-        <MenuItem component={Link} to="/member/my/documents" onClick={() => setUserMenuAnchor(null)} sx={{ fontSize: '0.875rem' }}>
-          My Posts
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleLogout} sx={{ fontSize: '0.875rem', color: 'error.main' }}>
-          Logout
-        </MenuItem>
-      </Menu>
-    </>
-  ) : (
-    <>
-      <IconButton size="small" onClick={(e) => setUserMenuAnchor(e.currentTarget)} sx={{ p: 0.5 }} aria-label="open auth menu">
-        <Avatar sx={{ width: 30, height: 30, bgcolor: '#78909c', fontSize: '0.8rem' }}>?</Avatar>
-      </IconButton>
-      <Menu
-        anchorEl={userMenuAnchor}
-        open={Boolean(userMenuAnchor)}
-        onClose={() => setUserMenuAnchor(null)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mt: 0.5 }}
-      >
-        <MenuItem component={Link} to="/member/login" onClick={() => setUserMenuAnchor(null)} sx={{ fontSize: '0.95rem' }}>
-          Login
-        </MenuItem>
-        <MenuItem component={Link} to="/member/signup" onClick={() => setUserMenuAnchor(null)} sx={{ fontSize: '0.95rem' }}>
-          Sign Up
-        </MenuItem>
-        <MenuItem component={Link} to="/member/find-account" onClick={() => setUserMenuAnchor(null)} sx={{ fontSize: '0.95rem' }}>
-          Find ID / Password
-        </MenuItem>
-      </Menu>
-    </>
   )
 }
 

@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, IconButton, InputBase, Toolbar, Typography, Container } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { useAuthStore } from '../../../stores/authStore'
@@ -12,7 +12,7 @@ type NavItem = { label: string; path: string; end: boolean }
 type Props = {
   navItems: NavItem[]
   isAdmin: boolean
-  setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setMobileOpen: (open: boolean) => void
   handleLogout: () => Promise<void>
   navbarStyles: {
     NAVBAR_BG: string
@@ -31,7 +31,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
 
   const { NAVBAR_BG, NAVBAR_BORDER, NAVBAR_TEXT, NAVBAR_TEXT_ACTIVE, NAVBAR_HOVER_BG } = navbarStyles
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
@@ -41,7 +41,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
   const navButtonSx = {
     color: NAVBAR_TEXT,
     textTransform: 'none' as const,
-    fontSize: '0.875rem',
+    fontSize: '12px',
     px: 1.5,
     py: 0.75,
     minWidth: 'auto',
@@ -53,7 +53,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
   return (
     <AppBar position="fixed" elevation={0} sx={{ bgcolor: NAVBAR_BG, borderBottom: `1px solid ${NAVBAR_BORDER}` }}>
       <Container maxWidth="lg">
-        <Toolbar sx={{ gap: 1, minHeight: { xs: 38, sm: 46 } }}>
+        <Toolbar sx={{ gap: 1, minHeight: { xs: 46, sm: 40 } }}>
         <IconButton
           color="inherit"
           edge="start"
@@ -78,7 +78,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
             fontSize: '1rem',
           }}
         >
-          Rhymix
+          Nanitelink
         </Typography>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 0.25, flex: 1 }}>

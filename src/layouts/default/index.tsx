@@ -14,7 +14,7 @@ import MobileDrawer from './components/MobileDrawer'
 
 const NAVBAR_BG = '#212121'
 const NAVBAR_BORDER = 'rgba(255,255,255,0.1)'
-const NAVBAR_TEXT = 'rgba(255,255,255,0.75)'
+const NAVBAR_TEXT = '#999999'
 const NAVBAR_TEXT_ACTIVE = '#ffffff'
 const NAVBAR_HOVER_BG = 'rgba(255,255,255,0.08)'
 
@@ -39,7 +39,7 @@ export default function DefaultLayout() {
 
       <MobileDrawer navItems={navItems} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin} user={user} handleLogout={handleLogout} navbarStyles={navbarStyles} />
 
-      <Toolbar sx={{ minHeight: { xs: 38, sm: 46 } }} />
+      <Toolbar sx={{ minHeight: { xs: 46, sm: 50 } }} />
 
       <MainContent>
         <Outlet />

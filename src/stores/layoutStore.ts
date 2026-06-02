@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, limit, query, where } from 'firebase/firestore'
 import { create } from 'zustand'
 
 import { db } from '../lib/firebase'
@@ -22,6 +22,7 @@ interface SiteDesignConfig {
 
 interface LayoutState {
   isReady: boolean
+  defaultMid: string | null
   siteConfig: SiteDesignConfig
   layoutDefs: Record<number, LayoutDef>
   // Cached per-mid layout_srl values (mirrors modules.layout_srl)
@@ -34,15 +35,17 @@ interface LayoutState {
 
 export const useLayoutStore = create<LayoutState>((set, get) => ({
   isReady: false,
+  defaultMid: null,
   siteConfig: { layout_srl: 0, route_layouts: {} },
   layoutDefs: {},
   moduleLayouts: {},
 
   init: async () => {
     try {
-      const [designSnap, layoutsSnap] = await Promise.all([
+      const [designSnap, layoutsSnap, defaultModuleSnap] = await Promise.all([
         getDoc(doc(db, 'settings', 'design')),
         getDocs(collection(db, 'layouts')),
+        getDocs(query(collection(db, 'modules'), where('isDefault', '==', true), limit(1))),
       ])
 
       const siteConfig: SiteDesignConfig = designSnap.exists()
@@ -55,7 +58,11 @@ export const useLayoutStore = create<LayoutState>((set, get) => ({
         layoutDefs[data.layout_srl] = data
       })
 
-      set({ isReady: true, siteConfig, layoutDefs })
+      const defaultMid = defaultModuleSnap.empty
+        ? null
+        : (defaultModuleSnap.docs[0].data().mid as string) ?? null
+
+      set({ isReady: true, siteConfig, layoutDefs, defaultMid })
     } catch (err) {
       console.error('[layoutStore] Failed to load layout config:', err)
       set({ isReady: true })

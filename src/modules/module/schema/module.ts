@@ -10,17 +10,17 @@ export interface ModuleDocument {
   mid: string
   layoutSrl: number
   mlayoutSrl: number
-  useMobile: 'Y' | 'N'
+  useMobile: boolean
   skin?: string
-  isSkinFix: 'Y' | 'N'
+  isSkinFix: boolean
   mskin?: string
-  isMskinFix: 'Y' | 'N'
+  isMskinFix: boolean
   browserTitle?: string
   description?: string
   content?: string
   mcontent?: string
-  isDefault: 'Y' | 'N'
-  openRss: 'Y' | 'N'
+  isDefault: boolean
+  openRss: boolean
   headerText?: string
   footerText?: string
   regdate?: FirestoreTimestamp

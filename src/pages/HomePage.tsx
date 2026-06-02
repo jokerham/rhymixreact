@@ -1,8 +1,11 @@
+import { Navigate } from 'react-router-dom'
+
+import { useLayoutStore } from '../stores/layoutStore'
+
 export default function HomePage() {
-  return (
-    <div className="page">
-      <h1>Welcome to Nanitelink CMS</h1>
-      <p>Home Page</p>
-    </div>
-  )
+  const defaultMid = useLayoutStore((state) => state.defaultMid)
+
+  if (!defaultMid) return null
+
+  return <Navigate to={`/${defaultMid}`} replace />
 }

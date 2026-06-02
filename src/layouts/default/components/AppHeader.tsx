@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { useAuthStore } from '../../../stores/authStore'
+import { useLayoutStore } from '../../../stores/layoutStore'
 
 import AuthMenu from './AuthMenu'
 import AuthPopover from './AuthPopover'
@@ -28,8 +29,9 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
   const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const { user } = useAuthStore()
+  const defaultMid = useLayoutStore((state) => state.defaultMid)
 
-  const { NAVBAR_BG, NAVBAR_BORDER, NAVBAR_TEXT, NAVBAR_TEXT_ACTIVE, NAVBAR_HOVER_BG } = navbarStyles
+  const { NAVBAR_BG, NAVBAR_TEXT, NAVBAR_TEXT_ACTIVE, NAVBAR_HOVER_BG } = navbarStyles
 
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault()
@@ -51,7 +53,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
   }
 
   return (
-    <AppBar position="fixed" elevation={0} sx={{ bgcolor: NAVBAR_BG, borderBottom: `1px solid ${NAVBAR_BORDER}` }}>
+    <AppBar position="fixed" elevation={0} sx={{ bgcolor: NAVBAR_BG, borderBottom: '2px solid rgb(217, 83, 79)' }}>
       <Container maxWidth="lg">
         <Toolbar sx={{ gap: 1, minHeight: { xs: 46, sm: 40 } }}>
         <IconButton
@@ -67,7 +69,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
         <Typography
           variant="h6"
           component={Link}
-          to="/"
+          to={defaultMid ? `/${defaultMid}` : '/'}
           sx={{
             color: '#fff',
             textDecoration: 'none',

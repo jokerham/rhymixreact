@@ -3,7 +3,7 @@ import { type RouteObject } from 'react-router-dom'
 
 import type { RouteGroup } from '../../types/route'
 
-const BoardContentListPage = lazy(() => import('./views/BoardContentListPage'))
+const MidResolver = lazy(() => import('../../layouts/MidResolver'))
 const BoardPostPage = lazy(() => import('./views/BoardPostPage'))
 const BoardWritePage = lazy(() => import('./views/BoardWritePage'))
 const BoardEditPage = lazy(() => import('./views/BoardEditPage'))
@@ -21,7 +21,7 @@ const boardRoutes: RouteObject[] = [
   {
     path: ':mid',
     children: [
-      { index: true, element: createElement(BoardContentListPage) },
+      { index: true, element: createElement(MidResolver) },
       { path: 'write', element: createElement(BoardWritePage) },
       { path: 'notices', element: createElement(BoardNoticePage) },
       { path: 'tags', element: createElement(BoardTagListPage) },

@@ -10,7 +10,7 @@ type Props = {
 export default function MainContent({ children }: Props) {
   return (
     <Box component="main" sx={{ flex: 1, bgcolor: 'transparent' }}>
-      <Container maxWidth="lg" sx={{ pt: 0.2, pb: 3 }}>
+      <Container maxWidth="xl" sx={{ pt: 0.2, pb: 3 }}>
         <Breadcrumb />
         <Box
           component="article"

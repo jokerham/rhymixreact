@@ -19,7 +19,7 @@ export default function Footer() {
         },
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Box
           sx={{
             display: 'flex',

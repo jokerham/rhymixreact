@@ -54,7 +54,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
 
   return (
     <AppBar position="fixed" elevation={0} sx={{ bgcolor: NAVBAR_BG, borderBottom: '2px solid rgb(217, 83, 79)' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, xl: 0 } }}>
         <Toolbar sx={{ gap: 1, minHeight: { xs: 46, sm: 40 } }}>
         <IconButton
           color="inherit"

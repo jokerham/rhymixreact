@@ -17,7 +17,7 @@ export default function TextField({ config, value, onChange, onBlur, error }: Pr
       <MuiTextField
         label={config.label}
         placeholder={config.placeholder}
-        type={config.type === 'number' ? 'number' : config.type === 'date' ? 'date' : 'text'}
+        type={config.type === 'number' ? 'number' : config.type === 'date' ? 'date' : config.type === 'password' ? 'password' : 'text'}
         slotProps={{ htmlInput: { maxLength: config.length } }}
         value={value ?? ''}
         onChange={(e) => onChange(e.target.value)}

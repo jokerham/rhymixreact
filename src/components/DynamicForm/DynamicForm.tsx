@@ -61,6 +61,7 @@ export default function DynamicForm({ config, fetchers, actionHandlers, onFieldC
 
           switch (field.type) {
             case 'text':
+            case 'password':
             case 'date':
             case 'number':
               return <TextField key={field.name} config={field} value={values[field.name]} onChange={(v) => handleChange(field.name, v)} onBlur={onBlur} error={error} />;

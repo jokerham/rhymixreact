@@ -43,6 +43,7 @@ export function buildValidationSchema(fields: FieldConfig[]): Yup.ObjectSchema<R
     const maxLen = v?.maxLength?.value ?? field.length;
     if (maxLen) s = s.max(maxLen, v?.maxLength?.message ?? `Maximum ${maxLen} characters`);
     if (v?.pattern) s = s.matches(new RegExp(v.pattern.value, v.pattern.flags ?? ''), v.pattern.message ?? 'Invalid format');
+    if (v?.match) s = s.oneOf([Yup.ref(v.match.field)], v.match.message ?? 'Fields must match');
     if (isRequired) s = s.required(requiredMsg);
     shape[field.name] = s;
   }

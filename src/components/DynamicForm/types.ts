@@ -1,4 +1,4 @@
-export type InputType = 'text' | 'textarea' | 'select' | 'checkbox' | 'date' | 'number';
+export type InputType = 'text' | 'password' | 'textarea' | 'select' | 'checkbox' | 'date' | 'number';
 
 export type FieldOption = {
   label: string;
@@ -14,6 +14,7 @@ export type ValidationConfig = {
   pattern?: { value: string; flags?: string; message?: string };
   email?: boolean | string;
   url?: boolean | string;
+  match?: { field: string; message?: string };
 };
 
 export type FieldConfig = {

@@ -2,8 +2,8 @@ import { AppBar, Box, Button, IconButton, InputBase, Toolbar, Typography, Contai
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
-import { useAuthStore } from '../../../stores/authStore'
-import { useLayoutStore } from '../../../stores/layoutStore'
+import { useAuth } from '../../../lib/auth/AuthContext'
+import { useLayoutConfig } from '../../../lib/layout/LayoutContext'
 
 import AuthMenu from './AuthMenu'
 import AuthPopover from './AuthPopover'
@@ -28,8 +28,8 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
   const navigate = useNavigate()
   const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(null)
   const [searchQuery, setSearchQuery] = useState('')
-  const { user } = useAuthStore()
-  const defaultMid = useLayoutStore((state) => state.defaultMid)
+  const { user } = useAuth()
+  const { defaultMid } = useLayoutConfig()
 
   const { NAVBAR_BG, NAVBAR_TEXT, NAVBAR_TEXT_ACTIVE, NAVBAR_HOVER_BG } = navbarStyles
 

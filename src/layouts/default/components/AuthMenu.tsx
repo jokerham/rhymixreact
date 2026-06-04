@@ -2,7 +2,7 @@ import { Avatar, Divider, IconButton, Menu, MenuItem } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { useAuthStore } from '../../../stores/authStore'
+import { useAuth } from '../../../lib/auth/AuthContext'
 
 type Props = {
   handleLogout: () => Promise<void>
@@ -47,7 +47,7 @@ const arrowPaperSx = {
 }
 
 export default function AuthMenu({ handleLogout, userMenuAnchor, setUserMenuAnchor }: Props) {
-  const { user } = useAuthStore()
+  const { user } = useAuth()
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function AuthMenu({ handleLogout, userMenuAnchor, setUserMenuAnch
         onClose={() => setUserMenuAnchor(null)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        PaperProps={{ elevation: 2, sx: arrowPaperSx }}
+        slotProps={{ paper: { elevation: 2, sx: arrowPaperSx } }}
       >
         <MenuItem disabled sx={{ fontSize: '0.75rem', color: 'text.secondary', py: '4px', px: '20px', minHeight: 'unset' }}>
           {user?.email}

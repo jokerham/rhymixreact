@@ -3,9 +3,9 @@ import { signOut } from 'firebase/auth'
 import { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
+import { useAuth } from '../../lib/auth/AuthContext'
 import { auth } from '../../lib/firebase'
-import { useAuthStore } from '../../stores/authStore'
-import { useMenuStore } from '../../stores/menuStore'
+import { useMenuItems } from '../../modules/menu/hooks/useMenuItems'
 
 import AppHeader from './components/AppHeader'
 import Footer from './components/Footer'
@@ -20,9 +20,8 @@ const NAVBAR_HOVER_BG = 'rgba(255,255,255,0.08)'
 
 export default function DefaultLayout() {
   const navigate = useNavigate()
-  const { user, isAdmin } = useAuthStore()
-  const navItems = useMenuStore((state) => state.navItems)
-
+  const { user, isAdmin } = useAuth()
+  const { navItems } = useMenuItems()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleLogout = async () => {

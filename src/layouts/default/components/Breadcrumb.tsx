@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import { FaSitemap } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
 
-import { useMenuStore } from '../../../stores/menuStore'
+import { useMenuItems } from '../../../modules/menu/hooks/useMenuItems'
 
 function normalize(path: string) {
   return path.startsWith('/') ? path : `/${path}`
@@ -10,8 +10,7 @@ function normalize(path: string) {
 
 export default function Breadcrumb() {
   const location = useLocation()
-  const navItems = useMenuStore((state) => state.navItems)
-  const isLoaded = useMenuStore((state) => state.isLoaded)
+  const { navItems, isLoaded } = useMenuItems()
 
   if (!isLoaded) return null
 

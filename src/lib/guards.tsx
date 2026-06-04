@@ -1,19 +1,18 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { useAuthStore } from '../stores/authStore'
+import { useAuth } from './auth/AuthContext'
 
 export function AuthGuard() {
-  const user = useAuthStore((s) => s.user)
+  const { user } = useAuth()
   return user ? <Outlet /> : <Navigate to="/member/login" replace />
 }
 
 export function GuestGuard() {
-  const user = useAuthStore((s) => s.user)
+  const { user } = useAuth()
   return user ? <Navigate to="/" replace /> : <Outlet />
 }
 
 export function AdminGuard() {
-  const user = useAuthStore((s) => s.user)
-  const isAdmin = useAuthStore((s) => s.isAdmin)
+  const { user, isAdmin } = useAuth()
   return user && isAdmin ? <Outlet /> : <Navigate to="/" replace />
 }

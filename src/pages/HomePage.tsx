@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom'
 
-import { useLayoutStore } from '../stores/layoutStore'
+import { useLayoutConfig } from '../lib/layout/LayoutContext'
 
 export default function HomePage() {
-  const defaultMid = useLayoutStore((state) => state.defaultMid)
+  const { defaultMid } = useLayoutConfig()
 
   if (!defaultMid) return null
 

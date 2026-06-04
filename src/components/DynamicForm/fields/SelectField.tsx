@@ -13,12 +13,13 @@ type Props = {
   onChange: (v: unknown) => void;
   onBlur?: () => void;
   error?: string;
+  size?: 'small' | 'medium';
 };
 
-export default function SelectField({ config, value, options, onChange, onBlur, error }: Props) {
+export default function SelectField({ config, value, options, onChange, onBlur, error, size }: Props) {
   const labelId = `df-select-${config.name}`;
   return (
-    <FormControl fullWidth variant="outlined" error={!!error}>
+    <FormControl fullWidth variant="outlined" error={!!error} size={size}>
       <InputLabel id={labelId}>{config.label}</InputLabel>
       <Select
         labelId={labelId}

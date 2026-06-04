@@ -14,6 +14,10 @@ export async function resolveOptions(ref?: string, fetchers?: FetcherMap): Promi
   }
 }
 
+export function buildPartialValidationSchema(fields: FieldConfig[], fieldNames: string[]): Yup.ObjectSchema<Record<string, unknown>> {
+  return buildValidationSchema(fields.filter((f) => fieldNames.includes(f.name)));
+}
+
 export function buildValidationSchema(fields: FieldConfig[]): Yup.ObjectSchema<Record<string, unknown>> {
   const shape: Record<string, Yup.Schema> = {};
 

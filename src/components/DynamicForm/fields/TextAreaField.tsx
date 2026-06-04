@@ -9,9 +9,10 @@ type Props = {
   onChange: (v: unknown) => void;
   onBlur?: () => void;
   error?: string;
+  size?: 'small' | 'medium';
 };
 
-export default function TextAreaField({ config, value, onChange, onBlur, error }: Props) {
+export default function TextAreaField({ config, value, onChange, onBlur, error, size }: Props) {
   return (
     <Box className="df-field df-textarea">
       <MuiTextField
@@ -26,6 +27,7 @@ export default function TextAreaField({ config, value, onChange, onBlur, error }
         rows={4}
         fullWidth
         variant="outlined"
+        size={size}
         slotProps={{ htmlInput: { maxLength: config.length } }}
         required={!!config.mandatory}
       />

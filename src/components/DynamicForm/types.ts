@@ -38,11 +38,19 @@ export type ActionConfig = {
   submit?: boolean;
 };
 
+export type StepConfig = {
+  title: string;
+  description?: string;
+  fields: string[]; // field names belonging to this step
+};
+
 export type FormConfig = {
   id?: string;
   title?: string;
   description?: string;
   ui?: string;
+  size?: 'small' | 'medium';
+  steps?: StepConfig[];
   fields: FieldConfig[];
   actions?: ActionConfig[];
 };

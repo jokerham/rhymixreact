@@ -2,7 +2,8 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Site configuration — public read, no client writes
+
+    // ── Public read-only ─────────────────────────────────────────────
     match /settings/{document} {
       allow read: if true;
     }
@@ -18,13 +19,48 @@ service cloud.firestore {
     match /modules/{document} {
       allow read: if true;
     }
-
-    // User profiles — authenticated read, owner write
-    match /user_profiles/{uid} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.uid == uid;
+    match /pageTypes/{document} {
+      allow read: if true;
     }
 
+    // ── Member documents ─────────────────────────────────────────────
+    // Created during signup (auth user must own the document)
+    match /members/{memberId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == memberId;
+      allow update: if request.auth != null && request.auth.uid == memberId;
+      allow delete: if request.auth != null && request.auth.uid == memberId;
+    }
+
+    // ── Uniqueness lookup collections ─────────────────────────────────
+    // Public read so signup can check availability before creating an account.
+    // Write restricted to authenticated users (the transaction runs after Auth signup).
+    match /uniqueUserIds/{docId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null
+        && request.auth.uid == resource.data.memberId;
+    }
+    match /uniqueEmails/{docId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null
+        && request.auth.uid == resource.data.memberId;
+    }
+    match /uniqueNicknames/{docId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null
+        && request.auth.uid == resource.data.memberId;
+    }
+    match /uniquePhones/{docId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow delete: if request.auth != null
+        && request.auth.uid == resource.data.memberId;
+    }
+
+    // ── Deny everything else ─────────────────────────────────────────
     match /{document=**} {
       allow read, write: if false;
     }

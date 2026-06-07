@@ -4,7 +4,7 @@ import { useAuth } from './auth/AuthContext'
 
 export function AuthGuard() {
   const { user } = useAuth()
-  return user ? <Outlet /> : <Navigate to="/member/login" replace />
+  return user ? <Outlet /> : <Navigate to="/" replace />
 }
 
 export function GuestGuard() {

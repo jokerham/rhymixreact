@@ -3,6 +3,7 @@ import { signOut } from 'firebase/auth'
 import { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
+import LoginPopup from '../../components/LoginPopup/LoginPopup'
 import { useAuth } from '../../lib/auth/AuthContext'
 import { auth } from '../../lib/firebase'
 import { useMenuItems } from '../../modules/menu/hooks/useMenuItems'
@@ -23,6 +24,7 @@ export default function DefaultLayout() {
   const { user, isAdmin } = useAuth()
   const { navItems } = useMenuItems()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [loginOpen, setLoginOpen] = useState(false)
 
   const handleLogout = async () => {
     setMobileOpen(false)
@@ -34,15 +36,17 @@ export default function DefaultLayout() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <AppHeader navItems={navItems} isAdmin={isAdmin} setMobileOpen={setMobileOpen} handleLogout={handleLogout} navbarStyles={navbarStyles} />
+      <AppHeader navItems={navItems} isAdmin={isAdmin} setMobileOpen={setMobileOpen} handleLogout={handleLogout} navbarStyles={navbarStyles} setLoginOpen={setLoginOpen} />
 
-      <MobileDrawer navItems={navItems} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin} user={user} handleLogout={handleLogout} navbarStyles={navbarStyles} />
+      <MobileDrawer navItems={navItems} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin} user={user} handleLogout={handleLogout} navbarStyles={navbarStyles} setLoginOpen={setLoginOpen} />
 
       <Toolbar sx={{ minHeight: { xs: 46, sm: 50 } }} />
 
       <MainContent>
         <Outlet />
       </MainContent>
+
+      <LoginPopup open={loginOpen} onClose={() => setLoginOpen(false)} onLoginSuccess={() => navigate('/')} />
 
       <Footer />
     </Box>

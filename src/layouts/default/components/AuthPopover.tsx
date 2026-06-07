@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 type Props = {
   anchor: null | HTMLElement
   setAnchor: React.Dispatch<React.SetStateAction<null | HTMLElement>>
+  setLoginOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const menuItemSx = {
@@ -47,7 +48,7 @@ const arrowPaperSx = {
   },
 }
 
-export default function AuthPopover({ anchor, setAnchor }: Props) {
+export default function AuthPopover({ anchor, setAnchor, setLoginOpen }: Props) {
   return (
     <>
       <IconButton
@@ -69,7 +70,7 @@ export default function AuthPopover({ anchor, setAnchor }: Props) {
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         slotProps={{ paper: { elevation: 2, sx: arrowPaperSx } }}
       >
-        <MenuItem component={Link} to="/member/login" onClick={() => setAnchor(null)} sx={menuItemSx}>
+        <MenuItem onClick={() => { setLoginOpen?.(true); setAnchor(null) }} sx={menuItemSx}>
           Login
         </MenuItem>
         <MenuItem component={Link} to="/member/signup" onClick={() => setAnchor(null)} sx={menuItemSx}>

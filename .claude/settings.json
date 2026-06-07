@@ -5,7 +5,21 @@
       "Read(//Applications/XAMPP/xamppfiles/htdocs/rhymix/modules/**)",
       "Bash(find /Applications/XAMPP/xamppfiles/htdocs/rhymix -type f -name \"*.xml\" | xargs grep -l \"table name=\\\\\"modules\\\\\"\" | head -3)",
       "Read(//Applications/XAMPP/xamppfiles/htdocs/rhymix/**)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(grep -oE 'primary:\\\\{[^}]{0,200}\\\\}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
+      "Bash(grep -oE '.{100}primary:\\\\{main:\"#[0-9a-fA-F]{6}\"[^}]{0,100}\\\\}.{0,100}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
+      "Bash(osascript -e 'tell application \"Safari\" to activate')",
+      "Bash(osascript -e 'tell application \"Google Chrome\" to activate')",
+      "Bash(screencapture /tmp/signin_browser.png)",
+      "Bash(osascript -e 'tell application \"Google Chrome\" *)",
+      "Bash(screencapture /tmp/signin_chrome.png)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=/tmp/signin_headless.png --window-size=800,700 \"file:///Users/dongkyunham/Desktop/signin.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --disable-gpu --screenshot=/tmp/signin_headless2.png --window-size=800,700 --virtual-time-budget=5000 \"file:///Users/dongkyunham/Desktop/signin.html\")",
+      "WebFetch(domain:www.nanitelink.com)",
+      "Bash(grep -oE 'dY=\\\\$n\\\\\\(\\\\{[^;]{0,1000}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
+      "Bash(grep -oE 'MuiTextField.{0,300}|MuiOutlinedInput.{0,300}|MuiInputLabel.{0,300}|MuiDialogTitle.{0,300}|MuiDialog[^A-Z].{0,300}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
+      "Bash(grep -oE 'MuiDialogContent.{0,300}|MuiDialogTitle.{0,300}|MuiDialogActions.{0,300}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
+      "Bash(grep -oE 'n7=\\\\$n\\\\\\(\\\\{.{0,1500}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)"
     ]
   }
 }

@@ -3,7 +3,6 @@ import { type RouteObject } from 'react-router-dom'
 
 import type { RouteGroup } from '../../types/route'
 
-const LoginPage = lazy(() => import('./views/LoginPage'))
 const SignUpPage = lazy(() => import('./views/SignUpPage'))
 const FindAccountPage = lazy(() => import('./views/FindAccountPage'))
 const MemberProfilePage = lazy(() => import('./views/MemberProfilePage'))
@@ -18,7 +17,6 @@ const MySavedPage = lazy(() => import('./views/MySavedPage'))
 const MyScrappedPage = lazy(() => import('./views/MyScrappedPage'))
 
 const guestRoutes: RouteObject[] = [
-  { path: 'member/login', element: createElement(LoginPage) },
   { path: 'member/signup', element: createElement(SignUpPage) },
   { path: 'member/find-account', element: createElement(FindAccountPage) },
 ]

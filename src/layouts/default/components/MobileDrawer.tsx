@@ -12,9 +12,10 @@ type Props = {
   user?: object
   handleLogout: () => Promise<void>
   navbarStyles: { NAVBAR_BG: string; NAVBAR_BORDER: string; NAVBAR_TEXT: string; NAVBAR_HOVER_BG: string }
+  setLoginOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function MobileDrawer({ navItems, mobileOpen, setMobileOpen, isAdmin, user, handleLogout, navbarStyles }: Props) {
+export default function MobileDrawer({ navItems, mobileOpen, setMobileOpen, isAdmin, user, handleLogout, navbarStyles, setLoginOpen }: Props) {
   const { NAVBAR_BG, NAVBAR_BORDER, NAVBAR_TEXT, NAVBAR_HOVER_BG } = navbarStyles
 
   return (
@@ -57,7 +58,7 @@ export default function MobileDrawer({ navItems, mobileOpen, setMobileOpen, isAd
             </ListItemButton>
           </>
         ) : (
-          <ListItemButton component={Link} to="/member/login" onClick={() => setMobileOpen(false)} sx={{ color: NAVBAR_TEXT, '&:hover': { bgcolor: NAVBAR_HOVER_BG, color: '#fff' } }}>
+          <ListItemButton onClick={() => { setLoginOpen?.(true); setMobileOpen(false) }} sx={{ color: NAVBAR_TEXT, '&:hover': { bgcolor: NAVBAR_HOVER_BG, color: '#fff' } }}>
             <ListItemText primary="Login" primaryTypographyProps={{ fontSize: '0.9rem' }} />
           </ListItemButton>
         )}

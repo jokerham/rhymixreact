@@ -219,7 +219,7 @@ export default function SignUpPage() {
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
           Already have an account?{' '}
-          <Box component="a" href="/member/login" sx={{ color: 'primary.main' }}>
+          <Box component="a" href="/" sx={{ color: 'primary.main' }}>
             Sign in
           </Box>
         </Typography>

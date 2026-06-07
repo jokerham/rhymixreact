@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, IconButton, InputBase, Toolbar, Typography, Container } from '@mui/material'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../../../lib/auth/AuthContext'
@@ -22,9 +22,10 @@ type Props = {
     NAVBAR_TEXT_ACTIVE: string
     NAVBAR_HOVER_BG: string
   }
+  setLoginOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogout, navbarStyles }: Props) {
+export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogout, navbarStyles, setLoginOpen }: Props) {
   const navigate = useNavigate()
   const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -133,7 +134,7 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
         {user ? (
           <AuthMenu handleLogout={handleLogout} setUserMenuAnchor={setUserMenuAnchor} userMenuAnchor={userMenuAnchor} />
         ) : (
-          <AuthPopover anchor={userMenuAnchor} setAnchor={setUserMenuAnchor} />
+          <AuthPopover anchor={userMenuAnchor} setAnchor={setUserMenuAnchor} setLoginOpen={setLoginOpen} />
         )}
         </Toolbar>
       </Container>

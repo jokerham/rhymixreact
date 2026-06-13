@@ -1,3 +1,7 @@
+html {
+  scrollbar-gutter: stable;
+}
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -58,15 +62,6 @@
 
 body {
   margin: 0;
-  background-color: #f0f0f0;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0,0,0,0.015) 3px,
-    rgba(0,0,0,0.015) 4px
-  );
-  background-attachment: fixed;
 }
 
 h1,
@@ -112,3 +107,5 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* Admin pages use a full-width white parent box; no global body class needed */

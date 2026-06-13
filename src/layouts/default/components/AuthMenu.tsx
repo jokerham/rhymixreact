@@ -47,7 +47,7 @@ const arrowPaperSx = {
 }
 
 export default function AuthMenu({ handleLogout, userMenuAnchor, setUserMenuAnchor }: Props) {
-  const { user } = useAuth()
+  const { user, isAdmin } = useAuth()
 
   return (
     <>
@@ -74,6 +74,14 @@ export default function AuthMenu({ handleLogout, userMenuAnchor, setUserMenuAnch
         <MenuItem component={Link} to="/member/my/documents" onClick={() => setUserMenuAnchor(null)} sx={menuItemSx}>
           My Posts
         </MenuItem>
+        {isAdmin && (
+          <>
+            <Divider />
+            <MenuItem component={Link} to="/admin" onClick={() => setUserMenuAnchor(null)} sx={menuItemSx}>
+              Manage Menu
+            </MenuItem>
+          </>
+        )}
         <Divider />
         <MenuItem onClick={handleLogout} sx={{ ...menuItemSx, color: 'error.main' }}>
           Logout

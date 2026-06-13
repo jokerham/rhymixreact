@@ -19,7 +19,11 @@
       "Bash(grep -oE 'dY=\\\\$n\\\\\\(\\\\{[^;]{0,1000}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
       "Bash(grep -oE 'MuiTextField.{0,300}|MuiOutlinedInput.{0,300}|MuiInputLabel.{0,300}|MuiDialogTitle.{0,300}|MuiDialog[^A-Z].{0,300}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
       "Bash(grep -oE 'MuiDialogContent.{0,300}|MuiDialogTitle.{0,300}|MuiDialogActions.{0,300}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
-      "Bash(grep -oE 'n7=\\\\$n\\\\\\(\\\\{.{0,1500}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)"
+      "Bash(grep -oE 'n7=\\\\$n\\\\\\(\\\\{.{0,1500}' /Users/dongkyunham/Desktop/SignIn_files/index-CG0HEbGI.js)",
+      "Bash(mkdir -p /Users/dongkyunham/Workshop/WEB/REACT/rhymixreact/src/modules/admin/components)"
+    ],
+    "additionalDirectories": [
+      "/Users/dongkyunham/Workshop/WEB/REACT/rhymixreact/src/modules/admin"
     ]
   }
 }

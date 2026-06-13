@@ -35,7 +35,7 @@ export default function DefaultLayout() {
   const navbarStyles = { NAVBAR_BG, NAVBAR_BORDER, NAVBAR_TEXT, NAVBAR_TEXT_ACTIVE, NAVBAR_HOVER_BG }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'rgb(241,241,241)' }}>
       <AppHeader navItems={navItems} isAdmin={isAdmin} setMobileOpen={setMobileOpen} handleLogout={handleLogout} navbarStyles={navbarStyles} setLoginOpen={setLoginOpen} />
 
       <MobileDrawer navItems={navItems} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin} user={user} handleLogout={handleLogout} navbarStyles={navbarStyles} setLoginOpen={setLoginOpen} />

@@ -3,8 +3,6 @@ import { type RouteObject } from 'react-router-dom'
 
 import type { RouteGroup } from '../../types/route'
 
-import AdminLayout from './AdminLayout'
-
 const AdminDashboard = lazy(() => import('./views/AdminDashboard'))
 const AdminMemberListPage = lazy(() => import('./views/AdminMemberListPage'))
 const AdminMemberInfoPage = lazy(() => import('./views/AdminMemberInfoPage'))
@@ -15,7 +13,6 @@ const AdminCommentListPage = lazy(() => import('./views/AdminCommentListPage'))
 const adminRoutes: RouteObject[] = [
   {
     path: 'admin',
-    element: createElement(AdminLayout),
     children: [
       { index: true, element: createElement(AdminDashboard) },
       { path: 'members', element: createElement(AdminMemberListPage) },

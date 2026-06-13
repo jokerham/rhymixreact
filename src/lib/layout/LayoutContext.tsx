@@ -93,6 +93,8 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const resolveLayoutName = useCallback((mid?: string, routeGroup?: string): string => {
+    if (routeGroup === 'admin') return 'admin'
+
     let layout_srl: number
 
     if (mid) {

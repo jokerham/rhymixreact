@@ -1,4 +1,5 @@
 import { Box, Drawer, List, ListItemButton, ListItemText, Divider } from '@mui/material'
+import type { User } from 'firebase/auth'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -9,7 +10,7 @@ type Props = {
   mobileOpen: boolean
   setMobileOpen: React.Dispatch<React.SetStateAction<boolean>>
   isAdmin: boolean
-  user?: object
+  user: User | null
   handleLogout: () => Promise<void>
   navbarStyles: { NAVBAR_BG: string; NAVBAR_BORDER: string; NAVBAR_TEXT: string; NAVBAR_HOVER_BG: string }
   setLoginOpen?: React.Dispatch<React.SetStateAction<boolean>>
@@ -23,7 +24,7 @@ export default function MobileDrawer({ navItems, mobileOpen, setMobileOpen, isAd
       anchor="left"
       open={mobileOpen}
       onClose={() => setMobileOpen(false)}
-      PaperProps={{ sx: { bgcolor: NAVBAR_BG, color: '#fff', width: 240 } }}
+      slotProps={{ paper: { sx: { bgcolor: NAVBAR_BG, color: '#fff', width: 240 } } }}
     >
       <Box sx={{ px: 2, py: 1.5, borderBottom: `1px solid ${NAVBAR_BORDER}` }}>
         <Box component="div" sx={{ fontWeight: 700, fontSize: '1rem', color: '#fff' }}>
@@ -39,27 +40,27 @@ export default function MobileDrawer({ navItems, mobileOpen, setMobileOpen, isAd
             onClick={() => setMobileOpen(false)}
             sx={{ color: NAVBAR_TEXT, '&:hover': { bgcolor: NAVBAR_HOVER_BG, color: '#fff' } }}
           >
-            <ListItemText primary={item.label} primaryTypographyProps={{ fontSize: '0.9rem' }} />
+            <ListItemText primary={item.label} slotProps={{ primary: { style: { fontSize: '0.9rem' } } }} />
           </ListItemButton>
         ))}
         {isAdmin && (
           <ListItemButton component={Link} to="/admin" onClick={() => setMobileOpen(false)} sx={{ color: NAVBAR_TEXT, '&:hover': { bgcolor: NAVBAR_HOVER_BG, color: '#fff' } }}>
-            <ListItemText primary="Admin" primaryTypographyProps={{ fontSize: '0.9rem' }} />
+            <ListItemText primary="Admin" slotProps={{ primary: { style: { fontSize: '0.9rem' } } }} />
           </ListItemButton>
         )}
         <Divider sx={{ borderColor: NAVBAR_BORDER, my: 0.5 }} />
         {user ? (
           <>
             <ListItemButton component={Link} to="/member/modify" onClick={() => setMobileOpen(false)} sx={{ color: NAVBAR_TEXT, '&:hover': { bgcolor: NAVBAR_HOVER_BG, color: '#fff' } }}>
-              <ListItemText primary="My Profile" primaryTypographyProps={{ fontSize: '0.9rem' }} />
+              <ListItemText primary="My Profile" slotProps={{ primary: { style: { fontSize: '0.9rem' } } }} />
             </ListItemButton>
             <ListItemButton onClick={handleLogout} sx={{ color: '#ef5350' }}>
-              <ListItemText primary="Logout" primaryTypographyProps={{ fontSize: '0.9rem' }} />
+              <ListItemText primary="Logout" slotProps={{ primary: { style: { fontSize: '0.9rem' } } }} />
             </ListItemButton>
           </>
         ) : (
           <ListItemButton onClick={() => { setLoginOpen?.(true); setMobileOpen(false) }} sx={{ color: NAVBAR_TEXT, '&:hover': { bgcolor: NAVBAR_HOVER_BG, color: '#fff' } }}>
-            <ListItemText primary="Login" primaryTypographyProps={{ fontSize: '0.9rem' }} />
+            <ListItemText primary="Login" slotProps={{ primary: { style: { fontSize: '0.9rem' } } }} />
           </ListItemButton>
         )}
       </List>

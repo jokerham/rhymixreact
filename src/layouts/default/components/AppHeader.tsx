@@ -12,7 +12,6 @@ type NavItem = { label: string; path: string; end: boolean }
 
 type Props = {
   navItems: NavItem[]
-  isAdmin: boolean
   setMobileOpen: (open: boolean) => void
   handleLogout: () => Promise<void>
   navbarStyles: {
@@ -25,7 +24,7 @@ type Props = {
   setLoginOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogout, navbarStyles, setLoginOpen }: Props) {
+export default function AppHeader({ navItems, setMobileOpen, handleLogout, navbarStyles, setLoginOpen }: Props) {
   const navigate = useNavigate()
   const [userMenuAnchor, setUserMenuAnchor] = useState<null | HTMLElement>(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -90,11 +89,6 @@ export default function AppHeader({ navItems, isAdmin, setMobileOpen, handleLogo
               {item.label}
             </Button>
           ))}
-          {isAdmin && (
-            <Button component={NavLink} to="/admin" sx={navButtonSx}>
-              Admin
-            </Button>
-          )}
         </Box>
 
         <Box sx={{ flex: { xs: 1, md: 0 } }} />

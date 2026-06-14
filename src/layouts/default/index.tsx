@@ -7,6 +7,7 @@ import LoginPopup from '../../components/LoginPopup/LoginPopup'
 import { useAuth } from '../../lib/auth/AuthContext'
 import { auth } from '../../lib/firebase'
 import { useMenuItems } from '../../modules/menu/hooks/useMenuItems'
+import { useDomain } from '../../modules/module/hooks/useDomain'
 
 import AppHeader from './components/AppHeader'
 import Footer from './components/Footer'
@@ -22,7 +23,8 @@ const NAVBAR_HOVER_BG = 'rgba(255,255,255,0.08)'
 export default function DefaultLayout() {
   const navigate = useNavigate()
   const { user, isAdmin } = useAuth()
-  const { navItems } = useMenuItems()
+  const { domain } = useDomain()
+  const { navItems } = useMenuItems(domain?.defaultMenuSrl)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [loginOpen, setLoginOpen] = useState(false)
 
@@ -36,7 +38,7 @@ export default function DefaultLayout() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: 'rgb(241,241,241)' }}>
-      <AppHeader navItems={navItems} isAdmin={isAdmin} setMobileOpen={setMobileOpen} handleLogout={handleLogout} navbarStyles={navbarStyles} setLoginOpen={setLoginOpen} />
+      <AppHeader navItems={navItems} setMobileOpen={setMobileOpen} handleLogout={handleLogout} navbarStyles={navbarStyles} setLoginOpen={setLoginOpen} />
 
       <MobileDrawer navItems={navItems} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} isAdmin={isAdmin} user={user} handleLogout={handleLogout} navbarStyles={navbarStyles} setLoginOpen={setLoginOpen} />
 

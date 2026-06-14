@@ -26,7 +26,7 @@ export default function AdminLayout() {
         <Box sx={{ display: 'flex', flex: 1 }}>
           <AdminSidebar />
 
-          <Box component="main" sx={{ flex: 1, p: 2 }}>
+          <Box component="main" sx={{ flex: 1, pl: 2 }}>
             <Outlet />
           </Box>
         </Box>

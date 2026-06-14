@@ -2,7 +2,7 @@ import { Box, Divider, Typography } from '@mui/material'
 
 export default function AdminFooter() {
   return (
-    <Box component="footer">
+    <Box component="footer" sx={{ mt: 2 }}>
       <Divider />
       <Typography variant="body2" sx={{ textAlign: 'center', py: 1.5, color: 'text.secondary' }}>
         © 2026 NaniteLink Admin

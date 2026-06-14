@@ -1,4 +1,4 @@
-import { limit, orderBy, where } from 'firebase/firestore'
+import { orderBy, type QueryConstraint, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 
 import { queryListWhere } from '../../../lib/firestore/executor'
@@ -7,26 +7,48 @@ import type { MenuItemDocument } from '../schema/menu-item'
 
 export type NavItem = { label: string; path: string; end: boolean }
 
-const MAIN_MENU_SRL = 1
+// If caller passes a menuSrl -> filter by it. If left undefined -> return all menus.
+export type MenuNode = MenuItemDocument & { children?: MenuNode[] }
 
-export function useMenuItems(menuSrl = MAIN_MENU_SRL) {
+export function useMenuItems(menuSrl?: number) {
   const [navItems, setNavItems] = useState<NavItem[]>([])
+  const [menuTree, setMenuTree] = useState<MenuNode[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    queryListWhere<MenuItemDocument>(getMenuItemsQuery, [
-      where('menuSrl', '==', menuSrl),
-      where('parentSrl', '==', 0),
-      orderBy('listorder', 'asc'),
-      limit(50),
-    ])
+    const constraints: QueryConstraint[] = [orderBy('parentSrl', 'asc'), orderBy('listorder', 'asc')]
+    if (typeof menuSrl === 'number') constraints.unshift(where('menuSrl', '==', menuSrl))
+
+    queryListWhere<MenuItemDocument>(getMenuItemsQuery, constraints)
       .then((items) => {
+        // Build map of nodes
+        const map = new Map<number, MenuNode>()
+        for (const it of items) {
+          map.set(it.menuItemSrl, { ...it, children: [] })
+        }
+
+        const roots: MenuNode[] = []
+        for (const node of map.values()) {
+          const parent = map.get(node.parentSrl)
+          if (parent) {
+            parent.children = parent.children ?? []
+            parent.children.push(node)
+          } else {
+            roots.push(node)
+          }
+        }
+
+        // Ensure children are sorted by listorder
+        function sortRec(nodes: MenuNode[]) {
+          nodes.sort((a, b) => (a.listorder ?? 0) - (b.listorder ?? 0))
+          for (const n of nodes) if (n.children && n.children.length) sortRec(n.children)
+        }
+
+        sortRec(roots)
+
+        setMenuTree(roots)
         setNavItems(
-          items.map((item) => ({
-            label: item.name ?? '',
-            path: item.url ?? '/',
-            end: item.url === '/',
-          })),
+          roots.map((item) => ({ label: item.name ?? '', path: item.url ?? '/', end: item.url === '/' })),
         )
         setIsLoaded(true)
       })
@@ -36,5 +58,5 @@ export function useMenuItems(menuSrl = MAIN_MENU_SRL) {
       })
   }, [menuSrl])
 
-  return { navItems, isLoaded }
+  return { navItems, isLoaded, menuTree }
 }

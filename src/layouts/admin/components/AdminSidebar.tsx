@@ -36,7 +36,7 @@ const initialMenuData = [
     name: 'Menu',
     icon: <FaListUl />,
     children: [
-      { id: 'menu-editor', name: 'Menu Editor', navigateTo: '/admin/menu-editor' },
+      { id: 'menu-editor', name: 'Menu Editor', navigateTo: '/admin/menu' },
       { id: 'site-design', name: 'Site Design', navigateTo: '/admin/site-design' },
       { id: 'layouts', name: 'Layouts', navigateTo: '/admin/layouts' },
     ],
@@ -85,15 +85,15 @@ const initialMenuData = [
   { id: 'advanced', name: 'Advanced', icon: <FaCog />, children: [] },
 ] as IMenu[]
 
-const SideMenuBox = styled(Box)(({ _theme }) => ({
+const SideMenuBox = styled(Box)({
   display: 'inline-block',
   p: '2px',
   borderRadius: '5px',
   boxShadow: '0 0 10px 3px rgba(0, 0, 0, 0.2)',
   position: 'relative',
-}))
+})
 
-const ToggleIconButton = styled(IconButton)(({ _theme }) => ({
+const ToggleIconButton = styled(IconButton)({
   position: 'absolute',
   top: '50%',
   right: '-10px',
@@ -110,7 +110,7 @@ const ToggleIconButton = styled(IconButton)(({ _theme }) => ({
   '&:hover': {
     backgroundColor: '#f0f0f0',
   },
-}))
+})
 
 export default function AdminSidebar() {
   const [expandedMenus, setExpandedMenus] = useState<string[]>([])
@@ -134,7 +134,7 @@ export default function AdminSidebar() {
     return (menu.children?.length ?? 0) > 0 ? <IoIosArrowDown /> : null
   }
 
-  const handleAccordionChange = (menu: IMenu) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  const handleAccordionChange = (menu: IMenu) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
     if ((menu.children?.length ?? 0) > 0) {
       setExpandedMenus((prevExpanded) =>
         prevExpanded.includes(menu.id)

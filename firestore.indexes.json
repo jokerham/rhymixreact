@@ -8,6 +8,14 @@
         { "fieldPath": "parentSrl", "order": "ASCENDING" },
         { "fieldPath": "listorder", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "menuItems",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "parentSrl", "order": "ASCENDING" },
+        { "fieldPath": "listorder", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

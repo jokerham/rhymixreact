@@ -7,6 +7,9 @@ service cloud.firestore {
     match /settings/{document} {
       allow read: if true;
     }
+    match /domains/{document} {
+      allow read: if true;
+    }
     match /layouts/{document} {
       allow read: if true;
     }

@@ -14,7 +14,8 @@
     "prepare": "husky",
     "seed": "tsx seeds/runner.ts up",
     "seed:rollback": "tsx seeds/runner.ts down",
-    "seed:status": "tsx seeds/runner.ts status"
+    "seed:status": "tsx seeds/runner.ts status",
+    "seed:refresh": "tsx seeds/runner.ts refresh"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^39.0.2",

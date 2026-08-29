@@ -26,6 +26,7 @@ import { getModuleMobileSkinVarsQuery } from './get-module-mobile-skin-vars'
 import { getModulePartConfigQuery } from './get-module-part-config'
 import { getModuleSkinVarsQuery } from './get-module-skin-vars'
 import { getModulesQuery } from './get-modules'
+import { getModuleTypesQuery } from './get-module-types'
 import { getNonuniqueDomainsQuery } from './get-nonunique-domains'
 import { getSiteQuery } from './get-site'
 import { getSiteInfoQuery } from './get-site-info'
@@ -80,6 +81,7 @@ export const MODULE_QUERY_DEFINITIONS = {
   getModulePartConfig: getModulePartConfigQuery,
   getModuleSkinVars: getModuleSkinVarsQuery,
   getModules: getModulesQuery,
+  getModuleTypes: getModuleTypesQuery,
   getSite: getSiteQuery,
   getSiteInfo: getSiteInfoQuery,
   getSites: getSitesQuery,

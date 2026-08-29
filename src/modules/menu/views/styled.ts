@@ -1,4 +1,4 @@
-import { Box, Link, TextField, Typography, styled } from '@mui/material'
+import { Box, Link, ListItemButton, ListItemText, TextField, Typography, styled } from '@mui/material'
 
 export const MainContainer = styled(Box)({
   display: 'flex',
@@ -66,13 +66,29 @@ export const FormContainer = styled(Box)({
   flexDirection: 'column',
   gap: '12px',
   padding: '16px',
-  backgroundColor: '#f5f5f5',
   borderRadius: '5px',
 })
 
 export const FormField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     height: '32px',
+    fontSize: '13px',
+  },
+})
+
+export const BaseTypography = styled(Typography)({
+  fontSize: '13px',
+  padding: '4px 8px',
+})
+
+export const SettingButton = styled(ListItemButton)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '6px 8px',
+})
+
+export const SettingText = styled(ListItemText)({
+  '& .MuiListItemText-primary': {
     fontSize: '13px',
   },
 })

@@ -1,7 +1,8 @@
-import { Button } from '@mui/material'
+import { Button, MenuItem } from '@mui/material'
 
 import MenuPanel from './MenuPanel'
 import { FormContainer, FormField } from './styled'
+import type { ModuleOption } from './types'
 
 interface FormData {
   name: string
@@ -9,25 +10,23 @@ interface FormData {
   link: string
 }
 
-interface MenuFormPanelProps {
-  mode: 'add' | 'edit'
+interface MenuEditFormPanelProps {
   formData: FormData
+  moduleOptions: ModuleOption[]
   onChange: (data: FormData) => void
   onSubmit: () => void
   onClose: () => void
 }
 
-export default function MenuFormPanel({ mode, formData, onChange, onSubmit, onClose }: MenuFormPanelProps) {
+export default function MenuEditFormPanel({ formData, moduleOptions, onChange, onSubmit, onClose }: MenuEditFormPanelProps) {
   return (
     <MenuPanel
-      title={mode === 'add' ? 'Add Menu' : 'Edit Menu'}
+      title="General Settings"
       onClose={onClose}
       actions={
         <>
           <Button size="small" variant="outlined" onClick={onClose}>Cancel</Button>
-          <Button size="small" variant="contained" onClick={onSubmit}>
-            {mode === 'add' ? 'Save' : 'Update'}
-          </Button>
+          <Button size="small" variant="contained" onClick={onSubmit}>Update</Button>
         </>
       }
     >
@@ -40,10 +39,18 @@ export default function MenuFormPanel({ mode, formData, onChange, onSubmit, onCl
         />
         <FormField
           label="Module"
+          select
           value={formData.module}
           onChange={(e) => onChange({ ...formData, module: e.target.value })}
           size="small"
-        />
+        >
+          <MenuItem value="">Select a module</MenuItem>
+          {moduleOptions.map((moduleOption) => (
+            <MenuItem key={moduleOption.name} value={moduleOption.name}>
+              {moduleOption.title || moduleOption.name}
+            </MenuItem>
+          ))}
+        </FormField>
         <FormField
           label="Link"
           value={formData.link}

@@ -1,3 +1,7 @@
+/**
+ * npm run seed [up|down|status|refresh <seed-name>]
+ */
+
 import { readdirSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -97,22 +101,40 @@ async function runStatus(): Promise<void> {
   console.log()
 }
 
+async function runRefresh(name: string): Promise<void> {
+  const file = `${name}.ts`
+  console.log(`Refreshing: ${name}`)
+  const seed = await loadSeed(file)
+  await seed.up()
+  await markApplied(name)
+  console.log(`  ✓ Refreshed ${name}`)
+}
+
 const command = process.argv[2]
 
 const commands: Record<string, () => Promise<void>> = {
   up: runUp,
   down: runDown,
   status: runStatus,
+  refresh: () => {
+    const name = process.argv[3]
+    if (!name) {
+      console.error('Usage: npm run seed refresh <seed-name>')
+      process.exit(1)
+    }
+    return runRefresh(name)
+  },
 }
 
 const handler = commands[command]
 
 if (!handler) {
-  console.log('Usage: npm run seed [up|down|status]')
+  console.log('Usage: npm run seed[:rollback|:status|:refresh] [name]')
   console.log()
-  console.log('  up      Apply all pending seeds')
-  console.log('  down    Rollback the last applied seed')
-  console.log('  status  Show the status of all seeds')
+  console.log('  seed                   Apply all pending seeds')
+  console.log('  seed:rollback          Rollback the last applied seed')
+  console.log('  seed:status            Show the status of all seeds')
+  console.log('  seed:refresh <name>    Re-run a specific seed regardless of status')
   process.exit(1)
 }
 

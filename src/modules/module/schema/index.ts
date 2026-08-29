@@ -1,5 +1,7 @@
 export * from './common'
 export * from './module'
+export * from './module-conf'
+export * from './module-type'
 export * from './module-config'
 export * from './module-extra-vars'
 export * from './module-grants'
